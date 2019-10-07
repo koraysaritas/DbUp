@@ -5,6 +5,7 @@ using DbUp;
 using DbUp.Engine;
 using DbUp.Helpers;
 using DbUp.Support;
+using DbUp.Altibase;
 
 namespace SampleApplication
 {
@@ -12,19 +13,14 @@ namespace SampleApplication
     {
         public static void Main(string[] args)
         {
-            var instanceName = @"(local)\SqlExpress";
-            // Uncomment the following line to run against sql local db instance.
-            // string instanceName = @"(localdb)\Projects";
+            var instanceName = @"127.0.0.1";
 
-            var connectionString =
-                $"Data Source={instanceName};Initial Catalog=SampleApplication;Integrated Security=True;Pooling=False";
+            var connectionString = $"DSN={instanceName};uid=TEST;pwd=TEST;NLS_USE=UTF8;PORT=20300;Pooling=true";
 
-            DropDatabase.For.SqlDatabase(connectionString);
 
-            EnsureDatabase.For.SqlDatabase(connectionString);
-
-            var upgradeEngineBuilder = DeployChanges.To
-                .SqlDatabase(connectionString, null) //null or "" for default schema for user
+            var upgradeEngineBuilder = DeployChanges
+                .To
+                .AltibaseDatabase(connectionString, "TEST") //null or "" for default schema for user
                 .WithScriptsEmbeddedInAssembly(Assembly.GetExecutingAssembly(), script =>
                 {
                     if (script.EndsWith("Script0006 - Transactions.sql"))

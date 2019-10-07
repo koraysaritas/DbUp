@@ -3,11 +3,9 @@
     <TargetFrameworks>netcoreapp2.0</TargetFrameworks>
     <RootNamespace>SampleApplication</RootNamespace>
     <AssemblyName>SampleApplication</AssemblyName> 
-    <OutputType>Exe</OutputType>
+    <OutputType>Exe</OutputType> 
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\dbup-sqlserver\dbup-sqlserver.csproj" />
-  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Scripts\*.sql" />
   </ItemGroup>
@@ -19,5 +17,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\dbup-altibase\dbup-altibase.csproj" />
   </ItemGroup>
 </Project>
