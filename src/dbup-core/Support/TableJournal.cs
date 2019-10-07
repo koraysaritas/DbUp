@@ -201,6 +201,8 @@ namespace DbUp.Support
                     return (long)executeScalar == 1;
                 if (executeScalar is decimal)
                     return (decimal)executeScalar == 1;
+                if (executeScalar is Int16)
+                    return Convert.ToInt32(executeScalar) == 1;
                 return (int)executeScalar == 1;
             }
         }
